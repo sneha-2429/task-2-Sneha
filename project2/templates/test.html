@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test API</title>
+</head>
+<body>
+
+<h2>Add Student</h2>
+
+<input type="text" id="name" placeholder="Name">
+<input type="number" id="age" placeholder="Age">
+
+<button onclick="addStudent()">Add Student</button>
+
+<script>
+function addStudent() {
+
+    const student = {
+        name: document.getElementById("name").value,
+        age: Number(document.getElementById("age").value)
+    };
+
+    fetch("http://127.0.0.1:5000/students", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(student)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(JSON.stringify(data));
+    })
+    .catch(error => {
+        console.error(error);
+        alert("Error occurred");
+    });
+}
+</script>
+
+</body>
+</html>
